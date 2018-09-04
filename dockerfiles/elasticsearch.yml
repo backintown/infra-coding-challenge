@@ -1,0 +1,6 @@
+cluster_name: docker-cluster
+nodes.name: records
+nodes.thread_pool.bulk.size: 30
+nodes.thread_pool.bulk.queue_size: 500
+nodes.thread_pool.index.size: 20
+nodes.thread_pool.index.queue_suze: 500

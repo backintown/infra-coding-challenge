@@ -13,6 +13,8 @@ services:
   es-dev:
     container_name: es-dev
     image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+    # volumes:
+    #   - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -22,6 +24,10 @@ services:
           - elasticsearch
     environment:
       - discovery.type=single-node
+      - bootstrap.memory_lock=true
+    volumes:
+      - ./config/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/elasticsearch.yml
+      # - esdata:/usr/share/elasticsearch/data
   kibana-dev:
     container_name: kibana-dev
     image: docker.elastic.co/kibana/kibana:6.4.0

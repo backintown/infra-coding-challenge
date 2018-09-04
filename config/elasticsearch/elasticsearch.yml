@@ -1,0 +1,6 @@
+cluster.name: "docker-cluster"
+node.name: infra_coding_challenge
+# thread_pool:
+#   index:
+#     size: 30
+#     queue_size: 1000
