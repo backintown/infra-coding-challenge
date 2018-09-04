@@ -5,7 +5,7 @@ const { createRecord, setupElasticsearch } = require('./utils');
 
 (async () => {
     await setupElasticsearch();
-    await seedRedis(12000);
+    await seedRedis(25000);
     await importRecords();
 })();
 
@@ -29,31 +29,13 @@ async function importRecords() {
             chunk.push(record);
         }
         j++;
-        if (j % 1000 === 0) {
+        if (j % 50 === 0) {
             console.log('importing');
             await elasticsearch.bulk({ body: chunk }).then(_ => {
                 chunk = [];
             });
         }
     } while (record);
-
-    //assemble bulk body
-    // let i = j = 0;
-    // while (j < records.length) {
-    //     chunks[i].push({
-    //         index: {
-    //             _index: 'records',
-    //             _type: 'all'
-    //         }
-    //     });
-    //     chunks[i].push(records[j]);
-    //     j++;
-    //     if (j % 100 === 0) i++;
-    // }
-
-    // for (let i = 0; i < chunks.length; i++) {
-    //     await elasticsearch.bulk({ body: chunks[i] });
-    // }
 
     await redis.disconnect();
 }
