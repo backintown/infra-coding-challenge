@@ -22,7 +22,7 @@ async function setupElasticsearch() {
         index: 'records',
         waitForActiveShards: '1',
         body: {
-            settings: { number_of_shards: 1, number_of_replicas: 0 },
+            settings: { number_of_shards: 3, number_of_replicas: 0 },
             mappings: { "all": {} }
         }
     });
